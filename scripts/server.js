@@ -11,6 +11,17 @@ router.get("/", function(req, res){
 });
 
 
+router.get("/test-params", function(req, res){
+	if(req.params.name == "Paul"){
+		res.json({"status" : "WORKS!"});
+
+	}else{
+		res.json({"status" : "BAD NAME!"});
+
+	}
+});
+
+
 
 app.use("/api",router);
 
