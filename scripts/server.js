@@ -12,13 +12,15 @@ router.get("/", function(req, res){
 
 
 router.post("/test-params", function(req, res){
-	if(req.params.name == "Paul"){
-		res.json({"status" : "WORKS!"});
+	var response = {"name" : req.params.name, "status": ""};
 
+	if(req.params.name == "Paul"){
+		response.status = "WORKS!"
 	}else{
-		res.json({"status" : "BAD NAME!"});
+		response.status = "BAD NAME!"
 
 	}
+	res.json(response);
 });
 
 
