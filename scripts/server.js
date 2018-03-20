@@ -11,7 +11,7 @@ router.get("/", function(req, res){
 });
 
 
-router.get("/test-params", function(req, res){
+router.post("/test-params", function(req, res){
 	if(req.params.name == "Paul"){
 		res.json({"status" : "WORKS!"});
 
