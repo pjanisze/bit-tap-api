@@ -1,15 +1,16 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+var mysql = require('mysql');
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-  var dbo = db.db("mydb");
-  dbo.createCollection("users", function(err, res) {
-    if (err) throw err;
-    console.log("Collection created!");
-  db.close();
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "bit-tap",
+  password: "bit-tap"
 });
 
-
-
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("CREATE DATABASE mydb", function (err, result) {
+    if (err) throw err;
+    console.log("Database created");
+  });
+});
