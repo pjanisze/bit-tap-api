@@ -3,7 +3,7 @@ var app = express();
 var http = require('http');
 var router = express.Router();
 
-
+router.use(express.json());
 
 
 router.get("/", function(req, res){
@@ -11,10 +11,10 @@ router.get("/", function(req, res){
 });
 
 
-router.post("/test-params", function(req, res){
-	var response = {"name" : req.params.name, "status": ""};
+router.post("/test-body", function(req, res){
+	var response = {"name" : req.body.name, "status": ""};
 
-	if(req.params.name == "Paul"){
+	if(req.body.name == "Paul"){
 		response.status = "WORKS!"
 	}else{
 		response.status = "BAD NAME!"
