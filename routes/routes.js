@@ -10,17 +10,17 @@ router.post("/transact", function(req, res){
 	
 
 
-}
+});
 
 router.post("/users/:userid", function(req, res){
 	
 	
 
-}
+});
 router.get("/users/:userid", function(req, res){
 	
 	
-}
+});
 
 router.post("/test-body", function(req, res){
 	var response = {"name" : req.body.name, "status": ""};
