@@ -3,8 +3,8 @@ var app = express();
 var http = require('http');
 var router = express.Router();
 
+app.use("/api",router);
 router.use(express.json());
-
 
 router.get("/", function(req, res){
 	res.json({"message" : "Hello World"});
