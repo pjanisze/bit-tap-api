@@ -1,6 +1,6 @@
 module.exports = {
 	newUser : function(data){
-		var mongoUtil = require( 'mongoUtil' );
+		var mongoUtil = require( './mongoUtil' );
 		var db = mongoUtil.getDb();
 		var bitcore = require('bitcore-lib');
 
