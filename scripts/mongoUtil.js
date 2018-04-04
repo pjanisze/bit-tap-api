@@ -12,6 +12,6 @@ module.exports = {
   },
 
   getDb: function() {
-    return _db;
+    return _db.db('bittapdb');
   }
 };
