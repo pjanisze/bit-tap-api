@@ -12,7 +12,7 @@ module.exports = {
 		var privateKey = new bitcore.PrivateKey(bn, 'testnet');
 		var privateKeyWif = privateKey.toWif();
 
-		var publicKey = ;
+		var publicKey = new bitcore.PublicKey(privateKey);
 		var address = privateKey.toAddress();
 		console.log("New Address for: " + data.name + ", " + address);
 
@@ -22,7 +22,7 @@ module.exports = {
 			"address":address,
 			"balance": 0
 		});
-		
+
 		return privateKeyWif;
 
 	},
