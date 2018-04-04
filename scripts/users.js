@@ -10,7 +10,7 @@ module.exports = {
 
 
 		var privateKey = new bitcore.PrivateKey(bn, 'testnet');
-		var privateKeyWif = privateKey.toWif();
+		var privateKeyWif = privateKey.toWIF();
 
 		var publicKey = new bitcore.PublicKey(privateKey);
 		var address = privateKey.toAddress();
