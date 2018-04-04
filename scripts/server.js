@@ -1,4 +1,4 @@
-var mongoUtil = require( 'mongoUtil' );
+var mongoUtil = require( './mongoUtil' );
 mongoUtil.connectToServer( function( err ) {
 
 

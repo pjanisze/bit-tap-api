@@ -14,7 +14,7 @@ router.post("/transact", function(req, res){
 
 //new user
 router.post("/users/", function(req, res){
-	var userService = require('users');
+	var userService = require('./users');
 	response = {"pkWIF" : ""};
 	response.pkWIF = userService.newUser(req.body);
 	return response;
