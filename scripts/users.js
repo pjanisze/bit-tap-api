@@ -14,7 +14,7 @@ module.exports = {
 		var privateKey = new bitcore.PrivateKey(bn, 'testnet');
 		var privateKeyWif = privateKey.toWIF();
 
-		var publicKey = new bitcore.PublicKey(privateKey);
+		var publicKey = new bitcore.PublicKey(privateKey).toString();
 		var address = privateKey.toAddress();
 		console.log("New Address for: " + data.name + ", " + address);
     	
