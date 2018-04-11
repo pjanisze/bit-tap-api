@@ -1,5 +1,4 @@
-var mongoUtil = require( './mongoUtil' );
-var db = mongoUtil.getDb();
+var MongoClient = require( 'mongodb' ).MongoClient;
 module.exports = {
 	
 
@@ -18,14 +17,18 @@ module.exports = {
 		var publicKey = new bitcore.PublicKey(privateKey);
 		var address = privateKey.toAddress();
 		console.log("New Address for: " + data.name + ", " + address);
+    	
+    	MongoClient.connect( "mongodb://localhost:27017/bittapdb", function( err, db ) {
+			db.collection( 'users' ).insertOne({
+				"name": data.name,
+				"public_key": publicKey,
+				"address":address,
+				"balance": 0
+			});
+			db.close();		  
+		} );
 
-		db.collection( 'users' ).insertOne({
-			"name": data.name,
-			"public_key": publicKey,
-			"address":address,
-			"balance": 0
-		});
-
+    	console.log("Returning: " + privateKeyWif);
 		return privateKeyWif;
 
 	},

@@ -17,7 +17,7 @@ router.post("/users/", function(req, res){
 	var userService = require('../scripts/users');
 	response = {"pkWIF" : ""};
 	response.pkWIF = userService.newUser(req.body);
-	return response;
+	res.json(response);
 });
 //update
 router.post("/users/:userid", function(req, res){
