@@ -19,7 +19,8 @@ module.exports = {
 		console.log("New Address for: " + data.name + ", " + address);
     	
     	MongoClient.connect( "mongodb://localhost:27017/bittapdb", function( err, db ) {
-			db.collection( 'users' ).insertOne({
+			const database= db.db('bittapdb')
+			database.collection( 'users' ).insertOne({
 				"name": data.name,
 				"public_key": publicKey,
 				"address":address,
