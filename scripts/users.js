@@ -15,7 +15,7 @@ module.exports = {
 		var privateKeyWif = privateKey.toWIF();
 
 		var publicKey = new bitcore.PublicKey(privateKey).toString();
-		var address = privateKey.toAddress();
+		var address = privateKey.toAddress().toString();
 		console.log("New Address for: " + data.name + ", " + address);
     	
     	MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
