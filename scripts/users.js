@@ -18,7 +18,7 @@ module.exports = {
 		var address = privateKey.toAddress();
 		console.log("New Address for: " + data.name + ", " + address);
     	
-    	MongoClient.connect( "mongodb://localhost:27017/bittapdb", function( err, db ) {
+    	MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
 			const database= db.db('bittapdb')
 
 
