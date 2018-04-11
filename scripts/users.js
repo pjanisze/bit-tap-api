@@ -23,10 +23,10 @@ module.exports = {
 
 
 			var doc = {
-				"name": data.name,
-				"public_key": publicKey,
-				"address":address,
-				"balance": 0
+				name: data.name,
+				public_key: publicKey,
+				address:address,
+				balance: 0
 			}
 			database.collection( 'users' ).insertOne(doc, function(err, res) {
 			    if (err) throw err;
