@@ -20,14 +20,20 @@ module.exports = {
     	
     	MongoClient.connect( "mongodb://localhost:27017/bittapdb", function( err, db ) {
 			const database= db.db('bittapdb')
-			database.collection( 'users' ).insertOne({
+
+
+			var doc = {
 				"name": data.name,
 				"public_key": publicKey,
 				"address":address,
 				"balance": 0
+			}
+			database.collection( 'users' ).insertOne(doc, function(err, res) {
+			    if (err) throw err;
+			    console.log("1 document inserted");
+			    db.close();
 			});
-			db.close();		  
-		} );
+		});
 
     	console.log("Returning: " + privateKeyWif);
 		return privateKeyWif;
