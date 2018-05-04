@@ -65,7 +65,7 @@ module.exports = {
 			var query = {_id: ObjectId(userId)};
 			database.collection('users').findOne(query, function(err, res){
 				if(err) throw err;
-				user = result;
+				user = res;
 				console.log("Users info retrieved for " + userId);
 				db.close();
 			});
