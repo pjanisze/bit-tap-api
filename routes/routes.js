@@ -22,7 +22,7 @@ router.post("/users/", function(req, res){
 //update
 router.post("/users/:userid", function(req, res){
 	response = {"status": false}
-	response.status = userService.update(req.body, userid);
+	response.status = userService.update(req.body, req.param(userid));
 	res.json(response);
 });
 //get user
