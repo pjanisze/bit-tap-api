@@ -66,10 +66,10 @@ module.exports = {
 			database.collection('users').findOne(query, function(err, res){
 				if(err) throw err;
 				user = res;
-				console.log("Users info retrieved for " + user.name);
 				db.close();
 			});
 		});
+		console.log(user.name);
 		return user;
 	}
 }
