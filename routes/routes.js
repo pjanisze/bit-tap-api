@@ -26,7 +26,7 @@ router.post("/users/:userId", function(req, res){
 	res.json(response);
 });
 //get user
-router.get("/users/:userid", function(req, res){
+router.get("/users/:userId", function(req, res){
 	var response = userService.getUser(req.params.userId);
 	res.json(response);
 });
