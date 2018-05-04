@@ -15,20 +15,20 @@ router.post("/transact", function(req, res){
 
 //new user
 router.post("/users/", function(req, res){
-	response = {"pkWIF" : ""};
+	var response = {"pkWIF" : ""};
 	response.pkWIF = userService.newUser(req.body);
 	res.json(response);
 });
 //update
 router.post("/users/:userId", function(req, res){
-	response = {"status": false}
-	response.status = userService.update(req.body, req.param("userId"));
+	var response = {"status": false}
+	response.status = userService.update(req.body, req.params.userId);
 	res.json(response);
 });
 //get user
 router.get("/users/:userid", function(req, res){
-	
-	
+	var response = userService.getUser(req.params.userId);
+	res.json(response);
 });
 
 router.post("/test-body", function(req, res){
