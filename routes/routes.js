@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require("request");
 var router = express.Router();
+var userService = require('../scripts/users');
 
 router.use(express.json());
 
@@ -14,16 +15,15 @@ router.post("/transact", function(req, res){
 
 //new user
 router.post("/users/", function(req, res){
-	var userService = require('../scripts/users');
 	response = {"pkWIF" : ""};
 	response.pkWIF = userService.newUser(req.body);
 	res.json(response);
 });
 //update
 router.post("/users/:userid", function(req, res){
-	
-	
-
+	response = {"status": false}
+	response.status = userService.update(req.body, userid);
+	res.json(response);
 });
 //get user
 router.get("/users/:userid", function(req, res){
