@@ -59,10 +59,10 @@ module.exports = {
 	},
 
 	getUser : function(userId){
+		var user;
 		MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
 			const database= db.db('bittapdb')
 			var query = {_id: ObjectId(userId)};
-			var user;
 			database.collection('users').findOne(query, function(err, res){
 				if(err) throw err;
 				user = result;
