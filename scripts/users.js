@@ -46,7 +46,7 @@ module.exports = {
 			const database= db.db('bittapdb')
 			var query = {_id: ObjectId(userId)};
 			var values = {$set: data};
-			dbo.collection('users').updateOne(query, values, function(err, res){
+			database.collection('users').updateOne(query, values, function(err, res){
 				if(err) throw err;
 
 				console.log("Users collection updated for " + userId);
