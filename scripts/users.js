@@ -1,4 +1,5 @@
 var MongoClient = require( 'mongodb' ).MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 module.exports = {
 	
 
@@ -28,7 +29,7 @@ module.exports = {
 				address:address,
 				balance: 0
 			}
-			database.collection( 'users' ).insertOne(doc, function(err, res) {
+			database.collection('users').insertOne(doc, function(err, res) {
 			    if (err) throw err;
 			    console.log("1 document inserted");
 			    db.close();
@@ -40,7 +41,20 @@ module.exports = {
 
 	},
 
-	update : function(data, userId){
+	update : function(data, userId){ 
+		MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
+			const database= db.db('bittapdb')
+			var query = {_id: ObjectId(userId)};
+			var values = {$set: data};
+			dbo.collection('users').updateOne(query, values, function(err, res){
+				if(err) throw err;
+
+				console.log("Users collection updated for " + userId);
+				db.close();
+			});
+		});
+
+		return true;
 
 	},
 
