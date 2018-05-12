@@ -55,7 +55,7 @@ module.exports = function(app, db){
 	});
 	//get user
 	app.get("/users/:userId", function(req, res){
-		var id = {_id: ObjectId(userId)};
+		var id = {_id: ObjectId(req.params.userId)};
 		var query = db.collection('users').findOne(id, function(err, dbres){
 			if(err) throw err;
 			res.json(dbres);
