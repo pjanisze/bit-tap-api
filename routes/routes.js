@@ -2,7 +2,7 @@ var express = require('express');
 var request = require("request");
 var router = express.Router();
 var userService = require('../scripts/users');
-
+var ObjectId = require('mongodb').ObjectID;
 router.use(express.json());
 
 module.exports = function(app, db){
