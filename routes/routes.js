@@ -55,9 +55,8 @@ module.exports = function(app, db){
 	});
 	//get user
 	app.get("/users/:userId", function(req, res){
-		const database= db.db('bittapdb')
 		var id = {_id: ObjectId(userId)};
-		var query = database.collection('users').findOne(id, function(err, dbres){
+		var query = db.collection('users').findOne(id, function(err, dbres){
 			if(err) throw err;
 			res.json(dbres);
 		});
