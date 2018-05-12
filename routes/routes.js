@@ -9,7 +9,45 @@ router.use(express.json());
 module.exports = function(app, db){
 	//new transaction
 	app.post("/transact", function(req, res){
+		var data = req.body;
+		var privateKey = bitcore.PrivateKey.fromWIF(data.privateKey);
+		var sendersAddress = privateKey.toAddress();
+		var receiversAddress = bitcore.Address.fromString(data.address);
+		var amount = data.amount
+		var fee = data.fee
 
+		var Insight = require('bitcore-explorers').Insight;
+		var insight = new Insight('testnet');
+
+		insight.getUnspentUtxos(sendersAddress, function(err, utxos) {
+			if(err){
+				console.log(err);
+				res.status(500).send({"error": "Failed to get UTXOS"});
+				return;
+			}
+
+			console.log("UTXOS for: " + sendersAddress + " = " utxos);
+			var tx = bitcore.Transaction();
+			tx.from(utxos);
+			tx.to(receiversAddress, amount);
+			tx.change(sendersAddress);
+			tx.fee(fee);
+			tx.sign(privateKey);
+
+
+			insight.broadcast(tx, function(err, returnedTxId){
+				if(err){
+					console.log(err);
+					res.status(500).send({"error": "Failed to broadcast TX"});
+					return;
+				}
+
+				console.log("TX COMPLETED. ID: " returnedTxId);
+				res.status(400);
+				res.json({"txId": returnedTxId});
+			});
+
+		});
 
 	});
 
@@ -39,7 +77,7 @@ module.exports = function(app, db){
 		db.collection('users').insertOne(doc, function(err, dbres) {
 		    if (err) throw err;
 		    console.log("1 document inserted");
-		    res.json(dbres);
+		    res.json({"privateKey": privateKeyWif});
 		});
 	});
 	//update
@@ -61,7 +99,6 @@ module.exports = function(app, db){
 			res.json(dbres);
 		});
 	});
-
 
 
 	app.get("/", function(req, res){
