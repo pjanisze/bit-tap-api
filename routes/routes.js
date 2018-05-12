@@ -42,7 +42,7 @@ module.exports = function(app, db){
 					return;
 				}
 
-				console.log("TX COMPLETED. ID: " returnedTxId);
+				console.log("TX COMPLETED. ID: " + returnedTxId);
 				res.status(400);
 				res.json({"txId": returnedTxId});
 			});
