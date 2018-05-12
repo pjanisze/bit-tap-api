@@ -26,7 +26,7 @@ module.exports = function(app, db){
 				return;
 			}
 
-			console.log("UTXOS for: " + sendersAddress + " = " utxos);
+			console.log("UTXOS for: " + sendersAddress + " = " + utxos);
 			var tx = bitcore.Transaction();
 			tx.from(utxos);
 			tx.to(receiversAddress, amount);
