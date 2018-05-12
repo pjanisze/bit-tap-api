@@ -3,21 +3,44 @@ var request = require("request");
 var router = express.Router();
 var userService = require('../scripts/users');
 var ObjectId = require('mongodb').ObjectID;
+var bitcore = require('bitcore-lib');
 router.use(express.json());
 
 module.exports = function(app, db){
 	//new transaction
 	app.post("/transact", function(req, res){
-		
 
 
 	});
 
 	//new user
 	app.post("/users/", function(req, res){
-		var response = {"pkWIF" : ""};
-		response.pkWIF = userService.newUser(req.body);
-		res.json(response);
+		var data = req.body;
+
+		var value = new Buffer(data.seed);
+		var hash = bitcore.crypto.Hash.sha256(value);
+		var bn = bitcore.crypto.BN.fromBuffer(hash);
+
+
+		var privateKey = new bitcore.PrivateKey(bn, 'testnet');
+		var privateKeyWif = privateKey.toWIF();
+
+		var publicKey = new bitcore.PublicKey(privateKey).toString();
+		var address = privateKey.toAddress().toString();
+		console.log("New Address for: " + data.name + ", " + address);
+
+
+		var doc = {
+			name: data.name,
+			public_key: publicKey,
+			address:address,
+			balance: 0
+		}
+		db.collection('users').insertOne(doc, function(err, dbres) {
+		    if (err) throw err;
+		    console.log("1 document inserted");
+		    res.json(dbres);
+		});
 	});
 	//update
 	app.post("/users/:userId", function(req, res){
@@ -29,27 +52,17 @@ module.exports = function(app, db){
 			console.log("Users collection updated for " + req.params.userId);
 			res.json(dbres);
 		});
-		// var response = {"status": false}
-		// response.status = userService.update(req.body, req.params.userId);
-		// res.json(response);
 	});
 	//get user
 	app.get("/users/:userId", function(req, res){
-		var response = userService.getUser(req.params.userId);
-		console.log(response.name+"!!!!");
-		res.json(response);
+		const database= db.db('bittapdb')
+		var id = {_id: ObjectId(userId)};
+		var query = database.collection('users').findOne(id, function(err, dbres){
+			if(err) throw err;
+			res.json(dbres);
+		});
 	});
 
-	app.post("/test-body", function(req, res){
-		var response = {"name" : req.body.name, "status": ""};
-
-		if(req.body.name == "Paul"){
-			response.status = "WORKS!"
-		}else{
-			response.status = "BAD NAME!"
-		}
-		res.json(response);
-	});
 
 
 	app.get("/", function(req, res){
