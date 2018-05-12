@@ -22,6 +22,7 @@ module.exports = function(app, db){
 	//update
 	app.post("/users/:userId", function(req, res){
 		var id = {_id: ObjectId(req.params.userId)};
+		console.log(req.body.name);
 		var values = {$set: req.body};
 		var query = db.collection('users').updateOne(id, values, function(err, dbres){
 			if(err) throw err;
