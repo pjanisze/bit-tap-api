@@ -26,7 +26,7 @@ module.exports = function(app, db){
 		var values = {$set: req.body};
 		var query = db.collection('users').updateOne(id, values, function(err, dbres){
 			if(err) throw err;
-			console.log("Users collection updated for " + userId);
+			console.log("Users collection updated for " + req.params.userId);
 			res.json(dbres);
 		});
 		// var response = {"status": false}
