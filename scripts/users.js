@@ -44,9 +44,9 @@ module.exports = {
 	update : function(data, userId){ 
 		MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
 			const database= db.db('bittapdb')
-			var query = {_id: ObjectId(userId)};
+			var id = {_id: ObjectId(userId)};
 			var values = {$set: data};
-			database.collection('users').updateOne(query, values, function(err, res){
+			var query = database.collection('users').updateOne(id, values, function(err, res){
 				if(err) throw err;
 
 				console.log("Users collection updated for " + userId);
@@ -62,11 +62,11 @@ module.exports = {
 		var user;
 		MongoClient.connect( "mongodb://localhost:27017/", function( err, db ) {
 			const database= db.db('bittapdb')
-			var query = {_id: ObjectId(userId)};
-			database.collection('users').findOne(query, function(err, res){
+			var id = {_id: ObjectId(userId)};
+			var query = database.collection('users').findOne(id, function(err, res){
 				if(err) throw err;
-				user = res;
 				db.close();
+				return res;
 			});
 		});
 		console.log(user.name);
