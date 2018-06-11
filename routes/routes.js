@@ -3,6 +3,9 @@ var request = require("request");
 var router = express.Router();
 var ObjectId = require('mongodb').ObjectID;
 var bitcore = require('bitcore-lib');
+require('dotenv').load();
+const BTC_NETWORK = process.env.BTC_NETWORK;
+
 router.use(express.json());
 
 module.exports = function(app, db){
@@ -16,7 +19,7 @@ module.exports = function(app, db){
 		var fee = data.fee
 
 		var Insight = require('bitcore-explorers').Insight;
-		var insight = new Insight('testnet');
+		var insight = new Insight(BTC_NETWORK);
 
 		insight.getUnspentUtxos(sendersAddress, function(err, utxos) {
 			if(err){
@@ -59,7 +62,7 @@ module.exports = function(app, db){
 		var bn = bitcore.crypto.BN.fromBuffer(hash);
 
 
-		var privateKey = new bitcore.PrivateKey(bn, 'testnet');
+		var privateKey = new bitcore.PrivateKey(bn, BTC_NETWORK);
 		var privateKeyWif = privateKey.toWIF();
 
 		var publicKey = new bitcore.PublicKey(privateKey).toString();
