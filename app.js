@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 require('dotenv').load();
 
 
-const DB_URL = process.env.DB_URI|| '';
+const DB_URL = process.env.DB_URL|| '';
 const DB_PORT = process.env.DB_PORT|| '';
 const DB_URI = 'mongodb://' + DB_URL + ":" + DB_PORT + "/"
 
