@@ -3,3 +3,4 @@ data/
 node_modules/
 package.json
 .env
+npm-debug.log
