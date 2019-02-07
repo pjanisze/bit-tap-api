@@ -21,21 +21,21 @@ More than just a tool for Bit-Tap: The Bit-Tap-Api repo can act as a bitcoin wal
 
 **PUT** `/transact`, for broadcasting a new transaction on the bitcoin network
 
-     - BODY:
+   - BODY:
 
-        - privateKey: the senders private key
+      - privateKey: the senders private key
 
-        - senderId: userId of sender
+      - senderId: userId of sender
 
-        - receiverId: userId of receiver
+      - receiverId: userId of receiver
 
-        - fee: transaction fee for miners (satoshis)
+      - fee: transaction fee for miners (satoshis)
 
-        - amount: amount (satoshis) to send to receiver
+      - amount: amount (satoshis) to send to receiver
 
-     - RETURN:
+   - RETURN:
 
-        - txId: the transaction id, you can search these on block viewing sites for the status of your transaction
+      - txId: the transaction id, you can search these on block viewing sites for the status of your transaction
 
 
 ***
