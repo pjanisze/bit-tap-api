@@ -31,11 +31,7 @@ router.post("/", async (req, res, next) => {
 
 //get user
 router.get("/:userId", async (req, res) => {
-    var sql = "SELECT * FROM users WHERE id = ?";
-    db.query(sql, req.params.userId, function(err, rows) {
-        if (err) throw err;
-        res.json(rows[0]);
-    });
+
 
     var user = await dbModel.getUser(req.params.userId);
     if(!user){

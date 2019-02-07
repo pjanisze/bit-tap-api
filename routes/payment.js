@@ -37,36 +37,7 @@ router.post("/", async function(req, res){
     var Insight = require('bitcore-explorers').Insight;
     var insight = new Insight(BTC_NETWORK);
 
-    console.log("GOT HERE3");
-    // insight.getUnspentUtxos(sendersAddress, function(err, utxos) {
-    //     if(err){
-    //         console.log(err);
-    //         res.status(500).send({"error": "Failed to get UTXOS"});
-    //         return;
-    //     }
-    //
-    //     console.log("UTXOS for: " + sendersAddress + " = " + utxos);
-    //     var tx = bitcore.Transaction();
-    //     tx.from(utxos);
-    //     tx.to(receiversAddress, amount);
-    //     tx.change(sendersAddress);
-    //     tx.fee(fee);
-    //     tx.sign(privateKey);
-    //
-    //
-    //     insight.broadcast(tx, function(err, returnedTxId){
-    //         if(err){
-    //             console.log(err);
-    //             res.status(500).send({"error": "Failed to broadcast TX"});
-    //             return;
-    //         }
-    //
-    //         console.log("TX COMPLETED. ID: " + returnedTxId);
-    //         res.status(400);
-    //         res.json({"txId": returnedTxId});
-    //     });
-    //
-    // });
+
 
     var utxos = await new Promise((resolve, reject) =>
       insight.getUnspentUtxos(sendersAddress, (err, _utxos) => {
@@ -78,7 +49,6 @@ router.post("/", async function(req, res){
           resolve(_utxos);
       })
     );
-    console.log("GOT HERE4: " + utxos);
     if (utxos == undefined){
       res.status(500).send({"error": "Failed to get UTXOS"});
     }
