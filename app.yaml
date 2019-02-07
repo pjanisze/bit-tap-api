@@ -6,3 +6,10 @@ resources:
   cpu: 1
   memory_gb: 0.5
   disk_size_gb: 10
+env_variables:
+	BTC_NETWORK: testnet
+	DB_URL: 35.232.121.125
+	DB_PORT: 
+	DB:
+	DB_USER:
+	DB_PASSWORD:

@@ -1,0 +1,30 @@
+{
+  "name": "bit-tap-api",
+  "version": "1.0.0",
+  "description": "More than just a tool for Bit-Tap: The Bit-Tap-Api repo can act as a bitcoin wallet service for anyone!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjanisze/bit-tap-api.git"
+  },
+  "author": "paul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjanisze/bit-tap-api/issues"
+  },
+  "homepage": "https://github.com/pjanisze/bit-tap-api#readme",
+  "dependencies": {
+    "bcrypt": "3.0.3",
+    "bitcore-explorers": "1.0.1",
+    "db-migrate": "^0.11.1",
+    "db-migrate-mysql": "1.1.10",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "request": "^2.88.0"
+  }
+}
